@@ -62,4 +62,14 @@ public class CustomerController {
                 .buildAndExpand(result.getId()).toUri());
         return new ResponseEntity<>(result, httpHeaders, HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long id){
+        customerRepository.deleteById(id);
+
+        String response = String.format("Successfully deleted customer with ID %d", id);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        return new ResponseEntity<>(response, httpHeaders, HttpStatus.OK);
+
+    }
 }
